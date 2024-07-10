@@ -3,29 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <name>analysis-ik</name>
-     <modules>
+    <modules>
         <module>core</module>
-        <module>elasticsearch</module>
         <module>opensearch</module>
-      </modules>
-    
+    </modules>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.infinilabs</groupId>
+    <groupId>com.ratutech.ratudb</groupId>
     <artifactId>analysis-ik</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <inceptionYear>2011</inceptionYear>
+    <inceptionYear>2024</inceptionYear>
 
     <properties>
-        <lucene.version>9.3.0</lucene.version>
-        <elasticsearch.version>8.4.1</elasticsearch.version>
-        <opensearch.version>2.0.1</opensearch.version>
+        <lucene.version>9.11.0</lucene.version>
+        <ratudb.version>2.2.2-SNAPSHOT</ratudb.version>
         <maven.compiler.target>1.8</maven.compiler.target>
-   
+
         <tests.rest.load_packaged>false</tests.rest.load_packaged>
         <skip.unit.tests>true</skip.unit.tests>
-        <gpg.keyname>4E899B30</gpg.keyname>
-        <gpg.useagent>true</gpg.useagent>
     </properties>
 
     <licenses>
@@ -43,39 +39,26 @@
             <organization>INFINI Labs</organization>
             <organizationUrl>https://infinilabs.com</organizationUrl>
         </developer>
+        <developer>
+            <name>lei.fu</name>
+            <email>305297641@qq.com</email>
+            <organization>RatuTech</organization>
+            <organizationUrl>https://github.com/Ratu-Tech</organizationUrl>
+        </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:medcl/elasticsearch-analysis-ik.git</connection>
-        <developerConnection>scm:git:git@github.com:medcl/elasticsearch-analysis-ik.git
+        <connection>scm:git:git@github.com:xiaodizi/analysis-ik.git</connection>
+        <developerConnection>scm:git:git@github.com:xiaodizi/analysis-ik.git
         </developerConnection>
-        <url>http://github.com/medcl/elasticsearch-analysis-ik</url>
+        <url>https://github.com/xiaodizi/analysis-ik</url>
     </scm>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>oss.sonatype.org</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>oss.sonatype.org</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <repositories>
         <repository>
-            <id>oss.sonatype.org</id>
-            <name>OSS Sonatype</name>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>true</enabled></snapshots>
-            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+            <id>ratu-tech</id>
+            <url>https://packages.aliyun.com/641280a5b6809992bb8fed9a/maven/ratu-tech</url>
         </repository>
     </repositories>
 
@@ -128,83 +111,32 @@
                 <additionalparam>-Xdoclint:none</additionalparam>
             </properties>
         </profile>
-            <profile>
-                <id>release</id>
-                <build>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.sonatype.plugins</groupId>
-                            <artifactId>nexus-staging-maven-plugin</artifactId>
-                            <version>1.6.3</version>
-                            <extensions>true</extensions>
-                            <configuration>
-                                <serverId>oss</serverId>
-                                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                                <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-release-plugin</artifactId>
-                            <version>2.1</version>
-                            <configuration>
-                                <autoVersionSubmodules>true</autoVersionSubmodules>
-                                <useReleaseProfile>false</useReleaseProfile>
-                                <releaseProfiles>release</releaseProfiles>
-                                <goals>deploy</goals>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-compiler-plugin</artifactId>
-                            <version>3.5.1</version>
-                            <configuration>
-                                <source>${maven.compiler.target}</source>
-                                <target>${maven.compiler.target}</target>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-gpg-plugin</artifactId>
-                            <version>1.5</version>
-                            <executions>
-                                <execution>
-                                    <id>sign-artifacts</id>
-                                    <phase>verify</phase>
-                                    <goals>
-                                        <goal>sign</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-source-plugin</artifactId>
-                            <version>2.2.1</version>
-                            <executions>
-                                <execution>
-                                    <id>attach-sources</id>
-                                    <goals>
-                                        <goal>jar-no-fork</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-javadoc-plugin</artifactId>
-                            <version>2.9</version>
-                            <executions>
-                                <execution>
-                                    <id>attach-javadocs</id>
-                                    <goals>
-                                        <goal>jar</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>
-                    </plugins>
-                </build>
-            </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>release</releaseProfiles>
+                            <goals>deploy</goals>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.5.1</version>
+                        <configuration>
+                            <source>${maven.compiler.target}</source>
+                            <target>${maven.compiler.target}</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
