@@ -54,14 +54,6 @@
         <url>https://github.com/xiaodizi/analysis-ik</url>
     </scm>
 
-
-    <repositories>
-        <repository>
-            <id>ratu-tech</id>
-            <url>https://packages.aliyun.com/641280a5b6809992bb8fed9a/maven/ratu-tech</url>
-        </repository>
-    </repositories>
-
     <dependencies>
     </dependencies>
 
