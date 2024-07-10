@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>analysis-ik</artifactId>
-        <groupId>com.infinilabs</groupId>
+        <groupId>com.ratutech.ratudb</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>opensearch-analysis-ik</artifactId>
-    <version>${opensearch.version}</version>
+    <version>${ratudb.version}</version>
     <description>IK Analyzer for OpenSearch</description>
     <packaging>jar</packaging>
 
@@ -25,15 +25,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.infinilabs</groupId>
+            <groupId>com.ratutech.ratudb</groupId>
             <artifactId>ik-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.opensearch</groupId>
-            <artifactId>opensearch</artifactId>
-            <version>${opensearch.version}</version>
+            <groupId>com.ratutech.ratudb</groupId>
+            <artifactId>ratudb</artifactId>
+            <version>${ratudb.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
